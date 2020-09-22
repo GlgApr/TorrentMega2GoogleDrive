@@ -2,16 +2,16 @@ class _BotCommands:
     def __init__(self):
         self.StartCommand = 'start'
         self.MirrorCommand = 'sedot'
-        self.UnzipMirrorCommand = 'unzip'
-        self.TarMirrorCommand = 'tar'
+        self.UnzipMirrorCommand = 'ekstrak'
+        self.TarMirrorCommand = 'bungkus'
         self.CancelMirror = 'batal'
         self.CancelAllCommand = 'batall'
-        self.ListCommand = 'list'
-        self.deleteCommand = 'del'
+        self.ListCommand = 'cari'
+        self.deleteCommand = 'hapus'
         self.StatusCommand = 'stat'
         self.AuthorizedUsersCommand = 'user'
-        self.AuthorizeCommand = 'izin'
-        self.UnAuthorizeCommand = 'larang'
+        self.AuthorizeCommand = 'auth'
+        self.UnAuthorizeCommand = 'tendang'
         self.AddSudoCommand = 'admin'
         self.RmSudoCommand = 'unadmin'
         self.PingCommand = 'ping'
@@ -20,7 +20,7 @@ class _BotCommands:
         self.HelpCommand = 'tolong'
         self.LogCommand = 'log'
         self.CloneCommand = "salin"
-        self.WatchCommand = 'vid'
-        self.TarWatchCommand = 'taryt'
+        self.WatchCommand = 'video'
+        self.TarWatchCommand = 'videokus'
 
 BotCommands = _BotCommands()
