@@ -41,6 +41,7 @@ class GoogleDriveHelper:
         self.__G_DRIVE_BASE_DOWNLOAD_URL = "https://drive.google.com/uc?id={}&export=download"
         self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL = "https://drive.google.com/drive/folders/{}"
         self.__listener = listener
+        self.__cinemaflix = "https://cinemaflix.me"
         self.__service = self.authorize()
         self._file_uploaded_bytes = 0
         self.uploaded_bytes = 0
@@ -96,7 +97,7 @@ class GoogleDriveHelper:
                                      resumable=False)
         file_metadata = {
             'name': file_name,
-            'description': 'mirror',
+            'description': 'ScupidC0des Projects',
             'mimeType': mime_type,
         }
         if parent_id is not None:
@@ -131,7 +132,7 @@ class GoogleDriveHelper:
         # File body description
         file_metadata = {
             'name': file_name,
-            'description': 'mirror',
+            'description': 'ScupidC0des Projects',
             'mimeType': mime_type,
         }
         if parent_id is not None:
@@ -317,16 +318,17 @@ class GoogleDriveHelper:
                 result = self.cloneFolder(meta.get('name'), meta.get('name'), meta.get('id'), dir_id)
                 msg += f'<b>Filename : </b><code>{meta.get("name")}</code>\n<b>Size : </b>{get_readable_file_size(self.transferred_size)}'
                 buttons = button_builder.ButtonMaker()
-                buttons.buildbutton("⚡Drive Link⚡", self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id))
+                buttons.buildbutton("✨Drive Link✨", self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id))
                 if INDEX_URL is not None:
                     url_path = requests.utils.quote(f'{meta.get("name")}')
                     url = f'{INDEX_URL}/{url_path}/'
-                    buttons.buildbutton("💥Index Link💥", url)
+                    buttons.buildbutton("🌩️ Cloud Mirror 🌩️", url)
+                    buttons.buildbutton("🎥 CINEMAFLIX 🎥", self.__cinemaflix)
             else:
                 file = self.copyFile(meta.get('id'), parent_id)
                 msg += f'<b>Filename : </b><code>{file.get("name")}</code>'
                 buttons = button_builder.ButtonMaker()
-                buttons.buildbutton("⚡Drive Link⚡", self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id")))
+                buttons.buildbutton("✨Drive Link✨", self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id")))
                 try:
                     msg += f'\n<b>Size : </b><code>{get_readable_file_size(int(meta.get("size")))}</code>'
                 except TypeError:
@@ -334,7 +336,8 @@ class GoogleDriveHelper:
                 if INDEX_URL is not None:
                         url_path = requests.utils.quote(f'{file.get("name")}')
                         url = f'{INDEX_URL}/{url_path}'
-                        buttons.buildbutton("💥Index Link💥", url)
+                        buttons.buildbutton("🌩️ Cloud Mirror 🌩️", url)
+                        buttons.buildbutton("🎥 CINEMAFLIX 🎥", self.__cinemaflix)
         except Exception as err:
             if isinstance(err, RetryError):
                 LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
@@ -342,7 +345,7 @@ class GoogleDriveHelper:
             err = str(err).replace('>', '').replace('<', '')
             LOGGER.error(err)
             return err, ""
-        return msg, InlineKeyboardMarkup(buttons.build_menu(2))
+        return msg, InlineKeyboardMarkup(buttons.build_menu(3))
 
     def cloneFolder(self, name, local_path, folder_id, parent_id):
         LOGGER.info(f"Syncing: {local_path}")
@@ -449,7 +452,7 @@ class GoogleDriveHelper:
                     content += f'<b> | <a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
                     nxt_page += 1
             telegra_ph.edit_page(path = self.path[prev_page],
-                                 title = 'LoaderX',
+                                 title = 'ScupidC0des Projects',
                                  html_content=content)
         return
 
@@ -469,7 +472,7 @@ class GoogleDriveHelper:
             content_count = 0
             self.telegraph_content = []
             self.path = []
-            msg += f'<h4>Results : {fileName}</h4><br>@LoaderXbot #ProjektX<br><br>'
+            msg += f'<h4>Results : {fileName}</h4><br>@ScupidC0des Projects<br><br>'
 
             for file in response.get('files', []):
                 if file.get('mimeType') == "application/vnd.google-apps.folder":  # Detect Whether Current Entity is a Folder or File.
@@ -498,7 +501,7 @@ class GoogleDriveHelper:
                 self.telegraph_content.append(msg)
 
             for content in self.telegraph_content :
-                self.path.append(telegra_ph.create_page(title = 'LoaderX',
+                self.path.append(telegra_ph.create_page(title = 'ScupidC0des Projects',
                                                 html_content=content )['path'])
 
             self.num_of_path = len(self.path)      
